@@ -1,5 +1,7 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
+import { BsArrowRight } from 'react-icons/bs';
 import { FaStar } from 'react-icons/fa';
 
 const CourseCard = ({ course }) => {
@@ -52,9 +54,9 @@ const CourseCard = ({ course }) => {
 
         <div className="card-actions justify-end mt-4">
           
-          <button className="btn btn-primary">
-            View Details
-          </button>
+         <Link href={`/all-courses/${course.id}`}>  <button className="btn btn-primary">
+            View Details  <BsArrowRight/>
+          </button></Link>
         </div>
 
       </div>
