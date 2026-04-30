@@ -51,6 +51,7 @@ const CourseCard = ({ course }) => {
         </div>
 
         <div className="card-actions justify-end mt-4">
+          
           <button className="btn btn-primary">
             View Details
           </button>
