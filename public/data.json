@@ -7,7 +7,7 @@
     "rating": 4.8,
     "level": "Beginner",
     "description": "Learn full-stack web development from scratch.",
-    "image": "https://i.postimg.cc/example-course1.png",
+    "image":"https://i.ibb.co.com/KcjZK8FW/creatopy-ZWg3-Ve-Yz-Ac-unsplash.jpg",
     "category": "Development"
   },
   {
@@ -18,7 +18,7 @@
     "rating": 4.7,
     "level": "Intermediate",
     "description": "Master React JS with hooks, state management and real projects.",
-    "image": "https://i.postimg.cc/example-course2.png",
+    "image": "https://i.ibb.co.com/KcjZK8FW/creatopy-ZWg3-Ve-Yz-Ac-unsplash.jpg",
     "category": "Development"
   },
   {
@@ -29,7 +29,7 @@
     "rating": 4.6,
     "level": "Beginner",
     "description": "Learn design principles, wireframing and prototyping.",
-    "image": "https://i.postimg.cc/example-course3.png",
+    "image": "https://i.ibb.co.com/KcjZK8FW/creatopy-ZWg3-Ve-Yz-Ac-unsplash.jpg",
     "category": "Design"
   },
   {
@@ -40,7 +40,7 @@
     "rating": 4.9,
     "level": "Intermediate",
     "description": "Analyze data and build machine learning models using Python.",
-    "image": "https://i.postimg.cc/example-course4.png",
+    "image": "https://i.ibb.co.com/KcjZK8FW/creatopy-ZWg3-Ve-Yz-Ac-unsplash.jpg",
     "category": "Data Science"
   },
   {
@@ -51,7 +51,7 @@
     "rating": 4.5,
     "level": "Beginner",
     "description": "Learn SEO, social media marketing and ads strategy.",
-    "image": "https://i.postimg.cc/example-course5.png",
+    "image": "https://i.ibb.co.com/KcjZK8FW/creatopy-ZWg3-Ve-Yz-Ac-unsplash.jpg",
     "category": "Marketing"
   },
   {
@@ -62,7 +62,7 @@
     "rating": 4.8,
     "level": "Advanced",
     "description": "Build production-ready full stack apps with Next.js.",
-    "image": "https://i.postimg.cc/example-course6.png",
+    "image": "https://i.ibb.co.com/KcjZK8FW/creatopy-ZWg3-Ve-Yz-Ac-unsplash.jpg",
     "category": "Development"
   }
 ]
