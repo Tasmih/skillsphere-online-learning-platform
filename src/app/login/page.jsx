@@ -34,11 +34,13 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (validate()) {
-      console.log("Login Data:", formData);
-      alert("Login successful");
-    }
-  };
+      if (validate()) {
+    console.log("Login Data:", formData);
+    toast.success("Login successful");
+  } else {
+    toast.error("Please fill all fields");
+  }
+};
 
   return (
     <div className="min-h-[80vh] flex justify-center items-center bg-white px-4">
@@ -69,7 +71,7 @@ const LoginPage = () => {
             )}
           </fieldset>
 
-          {/* Password WITH EYE ICON FIX */}
+          
           <fieldset className="fieldset relative">
             <legend className="fieldset-legend">Password</legend>
 
@@ -82,7 +84,7 @@ const LoginPage = () => {
               onChange={handleChange}
             />
 
-            {/* Eye Icon */}
+            
             <span
               className="absolute right-2 top-4 cursor-pointer text-lg"
               onClick={() => setShowPassword(!showPassword)}

@@ -57,7 +57,7 @@ const RegisterPage = () => {
 
         <form className="space-y-3" onSubmit={handleSubmit}>
 
-          {/* Name */}
+      
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Name</legend>
             <input
@@ -73,7 +73,7 @@ const RegisterPage = () => {
             )}
           </fieldset>
 
-          {/* Photo */}
+          
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Photo URL</legend>
             <input
@@ -89,7 +89,7 @@ const RegisterPage = () => {
             )}
           </fieldset>
 
-          {/* Email */}
+          
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Email</legend>
             <input
@@ -105,7 +105,7 @@ const RegisterPage = () => {
             )}
           </fieldset>
 
-          {/* Password */}
+        
           <fieldset className="fieldset relative">
             <legend className="fieldset-legend">Password</legend>
 
@@ -130,7 +130,7 @@ const RegisterPage = () => {
             )}
           </fieldset>
 
-          {/* Register Button */}
+      
           <button className="btn w-full bg-blue-500 text-white hover:bg-blue-600 transition">
             Register
           </button>
