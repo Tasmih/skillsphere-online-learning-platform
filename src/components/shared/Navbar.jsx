@@ -10,72 +10,107 @@ const Navbar = () => {
 
   return (
     <div className="border-b bg-white sticky top-0 z-50">
+
       <nav className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
 
         {/* Logo */}
         <div className="flex items-center gap-2">
           <Image
-            src="/assets/logo.png"
+            src="/assets/logo3.png"
             alt="SkillSphere logo"
-            width={50}
-            height={50}
+            width={70}
+            height={70}
             priority
           />
+
           <h3 className="text-xl font-bold">
-            <span className="text-blue-600">Skill</span>
-            <span className="text-orange-500">Sphere</span>
+            <span className="text-blue-800">Skill</span>
+            <span className="text-blue-500">Sphere</span>
           </h3>
         </div>
 
-
+        {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-6 text-sm font-medium">
-          <li><Link href={"/"}>Home</Link></li>
-          <li><Link href={"/all-courses"}>Courses</Link></li>
-          <li><Link href={"/profile"}>My Profile</Link></li>
+          <li>
+            <Link href="/" className="hover:text-blue-600 transition">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href="/all-courses" className="hover:text-blue-600 transition">
+              Courses
+            </Link>
+          </li>
+          <li>
+            <Link href="/profile" className="hover:text-blue-600 transition">
+              My Profile
+            </Link>
+          </li>
         </ul>
 
-        
+        {/* Desktop Buttons */}
         <div className="hidden md:flex items-center gap-3">
+
           <Link
             href="/login"
-            className="text-sm border px-4 py-1.5 rounded-md hover:bg-gray-100"
+            className="text-sm text-white bg-blue-800 px-4 py-1.5 rounded-md hover:bg-blue-600 transition"
           >
             Login
           </Link>
 
           <Link
             href="/register"
-            className="text-sm bg-orange-500 text-white px-4 py-1.5 rounded-md hover:bg-orange-600"
+            className="text-sm text-white bg-blue-500 px-4 py-1.5 rounded-md hover:bg-blue-400 transition"
           >
             Register
           </Link>
+
         </div>
 
-        {/* mobile  btn */}
+        {/* Mobile Button */}
         <button className="md:hidden" onClick={() => setOpen(!open)}>
-          <Menu className="w-6 h-6" />
+          <Menu className="w-6 h-6 text-gray-800" />
         </button>
+
       </nav>
 
       {/* Mobile Menu */}
       {open && (
-        <div className="md:hidden px-4 pb-4 flex flex-col gap-3">
-          <Link href="/" onClick={() => setOpen(false)}>Home</Link>
-          <Link href={"/all-courses"} onClick={() => setOpen(false)}>Courses</Link>
-          <Link href={"/profile"} onClick={() => setOpen(false)}>My Profile</Link>
+        <div className="md:hidden px-4 pb-4 flex flex-col gap-3 border-t">
 
-          <Link href={"/login"} className="border px-3 py-1 rounded">
+          <Link href="/" onClick={() => setOpen(false)}>
+            Home
+          </Link>
+
+          <Link href="/all-courses" onClick={() => setOpen(false)}>
+            Courses
+          </Link>
+
+          <Link href="/profile" onClick={() => setOpen(false)}>
+            My Profile
+          </Link>
+
+          <hr />
+
+          <Link
+            href="/login"
+            className="border px-3 py-1 rounded"
+            onClick={() => setOpen(false)}
+          >
             Login
           </Link>
 
           <Link
-            href={"/register"}
-            className="bg-orange-500 text-white px-3 py-1 rounded"
+            href="/register"
+            className="bg-blue-500 text-white px-3 py-1 rounded"
+            onClick={() => setOpen(false)}
           >
             Register
           </Link>
+
         </div>
       )}
+
     </div>
   );
 };
