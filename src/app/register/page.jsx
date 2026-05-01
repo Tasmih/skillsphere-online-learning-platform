@@ -118,12 +118,7 @@ const RegisterPage = () => {
               onChange={handleChange}
             />
 
-            <span
-              className="absolute right-2 top-4 cursor-pointer text-lg"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <FaEye /> : <FaEyeSlash />}
-            </span>
+           
 
             {errors.password && (
               <p className="text-red-500 text-sm">{errors.password}</p>
