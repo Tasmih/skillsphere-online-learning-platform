@@ -1,5 +1,7 @@
 import Banner from "@/components/Banner";
+import LearningTips from "@/components/LearningTips";
 import PopularCourses from "@/components/PopularCourses";
+import TopInstructors from "@/components/TopInstructors";
 import Image from "next/image";
 
 export default function Home() {
@@ -9,13 +11,17 @@ export default function Home() {
 
       <Banner />
 
-      <section className="p-6">
-        <h2 className="text-2xl font-bold mb-4">
-          Popular Courses
-        </h2>
+<section className="p-6 space-y-12">
+  <PopularCourses />
+</section>
 
-        <PopularCourses />
-      </section>
+<section className="p-6 space-y-12">
+  <LearningTips />
+</section>
+
+<section className="p-6 space-y-12">
+  <TopInstructors />
+</section>
 
     </div>
 

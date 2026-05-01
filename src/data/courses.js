@@ -7,7 +7,7 @@ const courses = [
     rating: 4.8,
     level: "Beginner",
     description: "Learn full-stack web development from scratch.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+    image: "https://i.ibb.co/KcjZK8FW/creatopy-ZWg3-Ve-Yz-Ac-unsplash.jpg",
     category: "Development"
   },
   {
@@ -18,7 +18,7 @@ const courses = [
     rating: 4.7,
     level: "Intermediate",
     description: "Master React JS with hooks and real projects.",
-    image: "https://images.unsplash.com/photo-1581090700227-1e8c6c8d2c5d",
+    image: "https://i.ibb.co/KcjZK8FW/creatopy-ZWg3-Ve-Yz-Ac-unsplash.jpg",
     category: "Development"
   },
   {
@@ -29,7 +29,7 @@ const courses = [
     rating: 4.6,
     level: "Beginner",
     description: "Learn design principles and prototyping.",
-    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0",
+    image: "https://i.ibb.co/KcjZK8FW/creatopy-ZWg3-Ve-Yz-Ac-unsplash.jpg",
     category: "Design"
   },
   {
@@ -40,7 +40,7 @@ const courses = [
     rating: 4.9,
     level: "Intermediate",
     description: "Analyze data using Python.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+    image: "https://i.ibb.co/KcjZK8FW/creatopy-ZWg3-Ve-Yz-Ac-unsplash.jpg",
     category: "Data Science"
   },
   {
@@ -51,7 +51,7 @@ const courses = [
     rating: 4.5,
     level: "Beginner",
     description: "Learn SEO and ads strategy.",
-    image: "https://images.unsplash.com/photo-1533750349088-cd871a92f312",
+    image: "https://i.ibb.co/KcjZK8FW/creatopy-ZWg3-Ve-Yz-Ac-unsplash.jpg",
     category: "Marketing"
   },
   {
@@ -62,7 +62,7 @@ const courses = [
     rating: 4.8,
     level: "Advanced",
     description: "Build full stack apps with Next.js.",
-    image: "https://images.unsplash.com/photo-1504639725590-34d0984388bd",
+    image: "https://i.ibb.co/KcjZK8FW/creatopy-ZWg3-Ve-Yz-Ac-unsplash.jpg",
     category: "Development"
   }
 ];

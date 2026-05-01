@@ -32,9 +32,9 @@ import { FaArrowRight, FaStar } from "react-icons/fa";
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <img src={course.image} alt={course.title} />
+      <img src={course.image} alt={course.title}  className="w-full h-80 object-cover rounded-xl mb-4"/>
 
-      <h1 className="text-2xl font-bold">{course.title}</h1>
+      <h1 className="text-2xl font-bold">{course ?.title}</h1>
       <p>Instructor: {course.instructor}</p>
       <p><span className="text-yellow-300"><FaStar/>
        </span>  {course.rating}</p>
