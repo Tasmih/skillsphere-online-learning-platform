@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -20,11 +21,17 @@ const LoginPage = () => {
     });
   };
 
+  
   const validate = () => {
     let newErrors = {};
 
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.password) newErrors.password = "Password is required";
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+    }
+
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    }
 
     setErrors(newErrors);
 
@@ -34,13 +41,16 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-      if (validate()) {
-    console.log("Login Data:", formData);
-    toast.success("Login successful");
-  } else {
-    toast.error("Please fill all fields");
-  }
-};
+    if (validate()) {
+      console.log("Login Data:", formData);
+
+      
+      toast.success("Login successful");
+    } else {
+  
+      toast.error("Please fill all fields");
+    }
+  };
 
   return (
     <div className="min-h-[80vh] flex justify-center items-center bg-white px-4">
@@ -55,7 +65,7 @@ const LoginPage = () => {
 
         <form className="space-y-3" onSubmit={handleSubmit}>
 
-          {/* Email */}
+          
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Email</legend>
             <input
@@ -71,7 +81,7 @@ const LoginPage = () => {
             )}
           </fieldset>
 
-          
+          {/* Password */}
           <fieldset className="fieldset relative">
             <legend className="fieldset-legend">Password</legend>
 
@@ -84,7 +94,7 @@ const LoginPage = () => {
               onChange={handleChange}
             />
 
-            
+          
             <span
               className="absolute right-2 top-4 cursor-pointer text-lg"
               onClick={() => setShowPassword(!showPassword)}
@@ -97,6 +107,7 @@ const LoginPage = () => {
             )}
           </fieldset>
 
+          
           <button className="btn w-full bg-blue-500 text-white hover:bg-blue-600 transition">
             Login
           </button>
@@ -106,7 +117,7 @@ const LoginPage = () => {
         <div className="divider my-3"></div>
 
         <p className="text-center text-sm">
-          Don’t have an account?{" "}
+          Don't have an account?{" "}
           <Link href="/register" className="text-blue-500 font-medium">
             Register
           </Link>
