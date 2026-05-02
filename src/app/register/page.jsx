@@ -1,157 +1,156 @@
-"use client";
-
-import Link from "next/link";
-import React, { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { toast } from "react-toastify";
+'use client'
+import { authClient } from '@/lib/auth-client';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const RegisterPage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    photo: "",
-    email: "",
-    password: "",
-  });
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const [errors, setErrors] = useState({});
-  const [showPassword, setShowPassword] = useState(false);
+    const [isShowPassword, setIsShowPassword] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+    const handleRegisterFunc = async (data) => {
+        console.log(data, "data");
 
-  const validate = () => {
-    let newErrors = {};
+        const { email, name, photo, password } = data;
 
-    if (!formData.name) newErrors.name = "Name is required";
-    if (!formData.photo) newErrors.photo = "Photo URL is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.password) newErrors.password = "Password is required";
+        const { data: res, error } = await authClient.signUp.email({
+            name: name,
+            email: email,
+            password: password,
+            image: photo,
+            callbackURL: '/',
+        });
 
-    setErrors(newErrors);
+        console.log(res, error);
 
-    return Object.keys(newErrors).length === 0;
-  };
+        if (error) {
+            toast.error(error.message || "Registration failed");
+            return;
+        }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (validate()) {
-      console.log("Register Data:", formData);
-      toast.success("Registration successful");
-    } else {
-      toast.error("Please fill all fields");
-    }
-  };
-
-  return (
-    <div className="min-h-[80vh] flex justify-center items-center bg-white px-4">
-
-      <div className="w-full max-w-sm p-6 rounded-xl bg-blue-50 shadow-md">
-
-        <h2 className="text-center text-2xl font-bold mb-4">
-          Create your account
-        </h2>
-
-        <div className="divider my-2"></div>
-
-        <form className="space-y-3" onSubmit={handleSubmit}>
-
-        
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">Name</legend>
-            <input
-              type="text"
-              name="name"
-              className="input input-bordered w-full"
-              placeholder="Enter name"
-              value={formData.name}
-              onChange={handleChange}
-            />
-            {errors.name && (
-              <p className="text-red-500 text-sm">{errors.name}</p>
-            )}
-          </fieldset>
-
+        if (res) {
           
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">Photo URL</legend>
-            <input
-              type="text"
-              name="photo"
-              className="input input-bordered w-full"
-              placeholder="Enter photo URL"
-              value={formData.photo}
-              onChange={handleChange}
-            />
-            {errors.photo && (
-              <p className="text-red-500 text-sm">{errors.photo}</p>
-            )}
-          </fieldset>
+            const { error: loginError } = await authClient.signIn.email({
+                email,
+                password,
+            });
 
-          {/* Email */}
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">Email</legend>
-            <input
-              type="email"
-              name="email"
-              className="input input-bordered w-full"
-              placeholder="Enter email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm">{errors.email}</p>
-            )}
-          </fieldset>
+            if (loginError) {
+                toast.error("Login failed after signup");
+                return;
+            }
 
-          {/* Password */}
-          <fieldset className="fieldset relative">
-            <legend className="fieldset-legend">Password</legend>
+            toast.success("Signup successful");
 
-            <input
-              type={showPassword ? "text" : "password"}
-              name="password"
-              className="input input-bordered w-full pr-10"
-              placeholder="Enter password"
-              value={formData.password}
-              onChange={handleChange}
-            />
+            
+            setTimeout(() => {
+                window.location.href = "/";
+            }, 800);
+        }
+    };
 
-            <span
-              className="absolute right-2 top-4 cursor-pointer text-lg"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <FaEye /> : <FaEyeSlash />}
-            </span>
+    return (
+        <div className='container mx-auto min-h-[80vh] flex justify-center items-center bg-slate-100'>
+            <div className='p-4 rounded-xl bg-white w-full max-w-md'>
 
-            {errors.password && (
-              <p className="text-red-500 text-sm">{errors.password}</p>
-            )}
-          </fieldset>
+                <h2 className='font-bold text-center mb-6'>
+                    Register your account
+                </h2>
 
-          
-          <button className="btn w-full bg-blue-500 text-white hover:bg-blue-600 transition">
-            Register
-          </button>
+                <form className='space-y-4' onSubmit={handleSubmit(handleRegisterFunc)}>
 
-        </form>
+              
+                    <fieldset className="fieldset">
+                        <legend className="fieldset-legend">Name</legend>
+                        <input
+                            type="text"
+                            className="input w-full"
+                            placeholder="Enter your name"
+                            {...register("name", { required: "Name field is required" })}
+                        />
+                        {errors.name && (
+                            <p className="text-red-500 text-sm">
+                                {errors.name.message}
+                            </p>
+                        )}
+                    </fieldset>
 
-        <div className="divider my-3"></div>
+                    
+                    <fieldset className="fieldset">
+                        <legend className="fieldset-legend">Photo URL</legend>
+                        <input
+                            type="text"
+                            className="input w-full"
+                            placeholder="Type here photo url"
+                            {...register("photo", { required: "Photo URL field is required" })}
+                        />
+                        {errors.photo && (
+                            <p className="text-red-500 text-sm">
+                                {errors.photo.message}
+                            </p>
+                        )}
+                    </fieldset>
 
-        <p className="text-center text-sm">
-          Already have an account?{" "}
-          <Link href="/login" className="text-blue-500 font-medium">
-            Login
-          </Link>
-        </p>
+                    
+                    <fieldset className="fieldset">
+                        <legend className="fieldset-legend">Email</legend>
+                        <input
+                            type="email"
+                            className="input w-full"
+                            placeholder="Enter your email address"
+                            {...register("email", { required: "Email field is required" })}
+                        />
+                        {errors.email && (
+                            <p className="text-red-500 text-sm">
+                                {errors.email.message}
+                            </p>
+                        )}
+                    </fieldset>
 
-      </div>
-    </div>
-  );
+                    
+                    <fieldset className="fieldset relative">
+                        <legend className="fieldset-legend">Password</legend>
+
+                        <input
+                            type={isShowPassword ? "text" : "password"}
+                            className="input w-full pr-10"
+                            placeholder="Enter your password"
+                            {...register("password", { required: "Password field is required" })}
+                        />
+
+                        <span
+                            className='absolute right-3 top-4 cursor-pointer text-lg'
+                            onClick={() => setIsShowPassword(!isShowPassword)}
+                        >
+                            {isShowPassword ? <FaEye /> : <FaEyeSlash />}
+                        </span>
+
+                        {errors.password && (
+                            <p className="text-red-500 text-sm">
+                                {errors.password.message}
+                            </p>
+                        )}
+                    </fieldset>
+
+                    <button className="btn w-full bg-slate-800 text-white">
+                        Register
+                    </button>
+
+                    <p className='mt-4 text-center'>
+                        Already have an account?{" "}
+                        <Link href={'/login'} className='text-blue-500'>
+                            Login
+                        </Link>
+                    </p>
+
+                </form>
+
+            </div>
+        </div>
+    );
 };
 
 export default RegisterPage;

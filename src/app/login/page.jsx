@@ -2,54 +2,39 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+  const handleLogicFunc = async (data) => {
+    console.log("Login Data:", data);
+
+    const { error } = await authClient.signIn.email({
+      email: data.email,
+      password: data.password,
+      rememberMe: true,
+      callbackURL: "/",
     });
-  };
 
-  
-  const validate = () => {
-    let newErrors = {};
-
-    if (!formData.email) {
-      newErrors.email = "Email is required";
+    if (error) {
+      toast.error(error.message || "Login failed");
+      return;
     }
 
-    if (!formData.password) {
-      newErrors.password = "Password is required";
-    }
-
-    setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (validate()) {
-      console.log("Login Data:", formData);
-
-      
-      toast.success("Login successful");
-    } else {
-  
-      toast.error("Please fill all fields");
-    }
+    toast.success("Login successful");
+    router.push("/");
   };
 
   return (
@@ -63,38 +48,35 @@ const LoginPage = () => {
 
         <div className="divider my-2"></div>
 
-        <form className="space-y-3" onSubmit={handleSubmit}>
+        <form className="space-y-3" onSubmit={handleSubmit(handleLogicFunc)}>
 
-          
+      
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Email</legend>
             <input
               type="email"
-              name="email"
               className="input input-bordered w-full"
               placeholder="Enter email"
-              value={formData.email}
-              onChange={handleChange}
+              {...register("email", { required: "Email is required" })}
             />
             {errors.email && (
-              <p className="text-red-500 text-sm">{errors.email}</p>
+              <p className="text-red-500 text-sm">
+                {errors.email.message}
+              </p>
             )}
           </fieldset>
 
-          {/* Password */}
+  
           <fieldset className="fieldset relative">
             <legend className="fieldset-legend">Password</legend>
 
             <input
               type={showPassword ? "text" : "password"}
-              name="password"
               className="input input-bordered w-full pr-10"
               placeholder="Enter password"
-              value={formData.password}
-              onChange={handleChange}
+              {...register("password", { required: "Password is required" })}
             />
 
-          
             <span
               className="absolute right-2 top-4 cursor-pointer text-lg"
               onClick={() => setShowPassword(!showPassword)}
@@ -103,11 +85,13 @@ const LoginPage = () => {
             </span>
 
             {errors.password && (
-              <p className="text-red-500 text-sm">{errors.password}</p>
+              <p className="text-red-500 text-sm">
+                {errors.password.message}
+              </p>
             )}
           </fieldset>
 
-          
+  
           <button className="btn w-full bg-blue-500 text-white hover:bg-blue-600 transition">
             Login
           </button>

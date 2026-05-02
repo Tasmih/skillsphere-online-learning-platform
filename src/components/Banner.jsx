@@ -10,7 +10,7 @@ const Banner = () => {
 
         {/* Image */}
         <Image
-          src={"/assets/banner.jpg"}
+          src={"/assets/banner2.png"}
           height={450}
           width={450}
           alt="skill learning banner"
