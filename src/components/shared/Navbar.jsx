@@ -40,7 +40,6 @@ const Navbar = () => {
     <div className="border-b bg-white sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
 
-        {/* logo */}
         <div className="flex items-center gap-2">
           <Image src="/assets/logo5.png" alt="logo" width={80} height={80} />
           <h3 className="text-xl font-bold">
@@ -49,7 +48,7 @@ const Navbar = () => {
           </h3>
         </div>
 
-        {/* links */}
+        
         <ul className="hidden md:flex gap-6 text-sm font-medium">
 
           <li>

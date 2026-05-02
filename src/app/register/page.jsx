@@ -1,156 +1,140 @@
-'use client'
-import { authClient } from '@/lib/auth-client';
-import Link from 'next/link';
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { toast } from 'react-toastify';
+"use client";
+
+import Link from "next/link";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 const RegisterPage = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-    const [isShowPassword, setIsShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
-    const handleRegisterFunc = async (data) => {
-        console.log(data, "data");
+  const handleRegister = async (data) => {
+    console.log("Register Data:", data);
 
-        const { email, name, photo, password } = data;
+    const { error } = await authClient.signUp.email({
+      email: data.email,
+      password: data.password,
+      name: data.name,
+      
+    });
 
-        const { data: res, error } = await authClient.signUp.email({
-            name: name,
-            email: email,
-            password: password,
-            image: photo,
-            callbackURL: '/',
-        });
+    if (error) {
+      toast.error(error.message || "Register failed");
+      return;
+    }
 
-        console.log(res, error);
+    toast.success("Registration successful");
+    router.push("/login");
+  };
 
-        if (error) {
-            toast.error(error.message || "Registration failed");
-            return;
-        }
+  const handleGoogleSignin = async() =>{ 
+    const data = await authClient.signIn.social({
+    provider: "google",
+  });
+console.log(data,)
+  }
 
-        if (res) {
-          
-            const { error: loginError } = await authClient.signIn.email({
-                email,
-                password,
-            });
+  return (
+    <div className="min-h-[80vh] flex justify-center items-center bg-white px-4">
+      <div className="w-full max-w-sm p-6 rounded-xl bg-blue-50 shadow-md">
 
-            if (loginError) {
-                toast.error("Login failed after signup");
-                return;
-            }
+        <h2 className="text-center text-2xl font-bold mb-4">
+          Create your account
+        </h2>
 
-            toast.success("Signup successful");
+        <div className="divider my-2"></div>
 
-            
-            setTimeout(() => {
-                window.location.href = "/";
-            }, 800);
-        }
-    };
+        <form className="space-y-3" onSubmit={handleSubmit(handleRegister)}>
 
-    return (
-        <div className='container mx-auto min-h-[80vh] flex justify-center items-center bg-slate-100'>
-            <div className='p-4 rounded-xl bg-white w-full max-w-md'>
+        
+          <fieldset className="fieldset">
+            <legend className="fieldset-legend">Name</legend>
+            <input
+              type="text"
+              className="input input-bordered w-full"
+              placeholder="Enter name"
+              {...register("name", { required: "Name is required" })}
+            />
+            {errors.name && (
+              <p className="text-red-500 text-sm">{errors.name.message}</p>
+            )}
+          </fieldset>
 
-                <h2 className='font-bold text-center mb-6'>
-                    Register your account
-                </h2>
+        
+          <fieldset className="fieldset">
+            <legend className="fieldset-legend">Email</legend>
+            <input
+              type="email"
+              className="input input-bordered w-full"
+              placeholder="Enter email"
+              {...register("email", { required: "Email is required" })}
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm">{errors.email.message}</p>
+            )}
+          </fieldset>
 
-                <form className='space-y-4' onSubmit={handleSubmit(handleRegisterFunc)}>
+      
+          <fieldset className="fieldset relative">
+            <legend className="fieldset-legend">Password</legend>
 
-              
-                    <fieldset className="fieldset">
-                        <legend className="fieldset-legend">Name</legend>
-                        <input
-                            type="text"
-                            className="input w-full"
-                            placeholder="Enter your name"
-                            {...register("name", { required: "Name field is required" })}
-                        />
-                        {errors.name && (
-                            <p className="text-red-500 text-sm">
-                                {errors.name.message}
-                            </p>
-                        )}
-                    </fieldset>
+            <input
+              type={showPassword ? "text" : "password"}
+              className="input input-bordered w-full pr-10"
+              placeholder="Enter password"
+              {...register("password", { required: "Password is required" })}
+            />
 
-                    
-                    <fieldset className="fieldset">
-                        <legend className="fieldset-legend">Photo URL</legend>
-                        <input
-                            type="text"
-                            className="input w-full"
-                            placeholder="Type here photo url"
-                            {...register("photo", { required: "Photo URL field is required" })}
-                        />
-                        {errors.photo && (
-                            <p className="text-red-500 text-sm">
-                                {errors.photo.message}
-                            </p>
-                        )}
-                    </fieldset>
+            <span
+              className="absolute right-2 top-4 cursor-pointer text-lg"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEye /> : <FaEyeSlash />}
+            </span>
 
-                    
-                    <fieldset className="fieldset">
-                        <legend className="fieldset-legend">Email</legend>
-                        <input
-                            type="email"
-                            className="input w-full"
-                            placeholder="Enter your email address"
-                            {...register("email", { required: "Email field is required" })}
-                        />
-                        {errors.email && (
-                            <p className="text-red-500 text-sm">
-                                {errors.email.message}
-                            </p>
-                        )}
-                    </fieldset>
+            {errors.password && (
+              <p className="text-red-500 text-sm">
+                {errors.password.message}
+              </p>
+            )}
+          </fieldset>
 
-                    
-                    <fieldset className="fieldset relative">
-                        <legend className="fieldset-legend">Password</legend>
+      
+          <button className="btn w-full bg-blue-500 text-white hover:bg-blue-600 transition">
+            Register
+          </button>
+        </form>
 
-                        <input
-                            type={isShowPassword ? "text" : "password"}
-                            className="input w-full pr-10"
-                            placeholder="Enter your password"
-                            {...register("password", { required: "Password field is required" })}
-                        />
+      
+        <div className="divider my-3">OR</div>
 
-                        <span
-                            className='absolute right-3 top-4 cursor-pointer text-lg'
-                            onClick={() => setIsShowPassword(!isShowPassword)}
-                        >
-                            {isShowPassword ? <FaEye /> : <FaEyeSlash />}
-                        </span>
+    
+        <button className="btn w-full bg-white border flex items-center justify-center gap-2 hover:bg-gray-100 transition" onClick={handleGoogleSignin}>
+          <FcGoogle className="w-5 h-5" />
+          Continue with Google
+        </button>
 
-                        {errors.password && (
-                            <p className="text-red-500 text-sm">
-                                {errors.password.message}
-                            </p>
-                        )}
-                    </fieldset>
+        <p className="text-center text-sm mt-3">
+          Already have an account?{" "}
+          <Link href="/login" className="text-blue-500 font-medium">
+            Login
+          </Link>
+        </p>
 
-                    <button className="btn w-full bg-slate-800 text-white">
-                        Register
-                    </button>
-
-                    <p className='mt-4 text-center'>
-                        Already have an account?{" "}
-                        <Link href={'/login'} className='text-blue-500'>
-                            Login
-                        </Link>
-                    </p>
-
-                </form>
-
-            </div>
-        </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default RegisterPage;

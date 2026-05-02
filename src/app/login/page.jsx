@@ -25,7 +25,7 @@ const LoginPage = () => {
       email: data.email,
       password: data.password,
       rememberMe: true,
-      callbackURL: "/",
+     
     });
 
     if (error) {
@@ -34,7 +34,11 @@ const LoginPage = () => {
     }
 
     toast.success("Login successful");
-    router.push("/");
+    // for proxy
+    const params = new URLSearchParams(window.location.search)
+    const callbackURL = params.get('callbackURL') || '/'
+    router.push(callbackURL)
+
   };
 
   return (

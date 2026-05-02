@@ -1,76 +1,83 @@
 "use client";
 
+import { useSession, authClient } from "@/lib/auth-client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-
+import { FaUser, FaImage } from "react-icons/fa";
 
 const UpdateProfilePage = () => {
+
+  const { data: session, isLoading } = useSession();
   const router = useRouter();
 
-  const [form, setForm] = useState({
-    name: "",
-    image: "",
-  });
+  const [name, setName] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
+  const handleUpdate = async () => {
+    console.log("Updating profile:", { name, imageUrl });
+
+    const { error } = await authClient.updateUser({
+      name: name || session?.user?.name,
+      image: imageUrl || session?.user?.image,
     });
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!form.name) {
-      toast.error("Name is required");
+    if (error) {
+      toast.error(error.message || "Update failed");
       return;
     }
-
-    if (!form.image) {
-      toast.error("Image URL is required");
-      return;
-    }
-
-    console.log("Updated Data:", form);
 
     toast.success("Profile updated successfully");
-
-    router.push("/profile"); 
+    router.push("/profile");
   };
 
+  if (isLoading) return (
+    <div className="flex justify-center items-center min-h-[60vh]">
+      <span className="loading loading-spinner loading-lg text-blue-500"></span>
+    </div>
+  )
+
   return (
-    <div className="max-w-xl mx-auto p-6">
+    <div className="min-h-[80vh] flex justify-center items-center px-4">
 
-      <h1 className="text-2xl font-bold mb-6">Update Profile</h1>
+      <div className="w-full max-w-md bg-blue-50 p-6 rounded-xl shadow-md space-y-4">
 
-      <form onSubmit={handleSubmit} className="space-y-4 bg-blue-50 p-6 rounded-xl">
+        <h1 className="text-2xl font-bold">Update Profile</h1>
 
         <div>
-          <label>Name</label>
+          <label className="block text-sm font-medium mb-1 flex items-center gap-1">
+            <FaUser className="text-blue-500" /> Name
+          </label>
           <input
             type="text"
-            name="name"
             className="input input-bordered w-full"
-            onChange={handleChange}
+            placeholder={session?.user?.name}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
 
         <div>
-          <label>Image URL</label>
+          <label className="block text-sm font-medium mb-1 flex items-center gap-1">
+            <FaImage className="text-blue-500" /> Image URL
+          </label>
           <input
             type="text"
-            name="image"
             className="input input-bordered w-full"
-            onChange={handleChange}
+            placeholder="https://your-image-url.com"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
           />
         </div>
 
-        <button className="btn w-full bg-blue-500 text-white">
+        <button
+          onClick={handleUpdate}
+          className="btn w-full bg-blue-500 text-white hover:bg-blue-600 transition"
+        >
           Update Information
         </button>
 
-      </form>
+      </div>
 
     </div>
   );

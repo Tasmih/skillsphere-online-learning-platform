@@ -7,7 +7,6 @@ const PopularCourses =async () => {
     console.log(courses,"courses")
 
 
-  // top 3 courses by rating
   const topCourses = [...courses]
     .sort((a, b) => Number(b.rating) - Number(a.rating))
     .slice(0, 3);
