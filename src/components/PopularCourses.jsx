@@ -1,28 +1,43 @@
+import { FaFire } from "react-icons/fa";
 import CourseCard from "./CourseCard";
 
+import Marquee from "react-fast-marquee";
 
-const PopularCourses =async () => {
-    const res = await fetch ('http://localhost:3000/data.json')
-    const  courses =await res.json()
-    console.log(courses,"courses")
-
+const PopularCourses = async () => {
+  const res = await fetch('http://localhost:3000/data.json');
+  const courses = await res.json();
 
   const topCourses = [...courses]
     .sort((a, b) => Number(b.rating) - Number(a.rating))
     .slice(0, 3);
 
   return (
-   <div>
-    <h1 className="text-2xl font-bold my-5">Popular Courses</h1>
+    <section className="py-4 md:py-6 px-2 md:px-4 bg-blue-50 rounded-xl">
 
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {topCourses.map(course => (
-        <CourseCard key={course.id} course={course} />
-      ))}
-    </div>
-  </div>
+   <div className="text-center mb-10">
 
-    
+  <h1 className="flex items-center justify-center gap-3 text-2xl md:text-3xl font-bold text-gray-800">
+
+    <FaFire className="text-blue-500" />
+    <span>Popular Courses</span>
+    <FaFire className="text-blue-500" />
+
+  </h1>
+
+  <p className="text-gray-500 mt-2 text-sm md:text-base">
+    Top rated courses chosen by students
+  </p>
+
+</div>
+
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {topCourses.map(course => (
+          <CourseCard key={course.id} course={course} />
+        ))}
+      </div>
+
+    </section>
   );
 };
 

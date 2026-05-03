@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import { FaUser, FaImage } from "react-icons/fa";
 
 const UpdateProfilePage = () => {
-
   const { data: session, isLoading } = useSession();
   const router = useRouter();
 
@@ -15,11 +14,14 @@ const UpdateProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
 
   const handleUpdate = async () => {
-    console.log("Updating profile:", { name, imageUrl });
+    if (!name.trim() && !imageUrl.trim()) {
+      toast.error("Please provide a name or image URL to update");
+      return;
+    }
 
     const { error } = await authClient.updateUser({
-      name: name || session?.user?.name,
-      image: imageUrl || session?.user?.image,
+      name: name.trim() || session?.user?.name,
+      image: imageUrl.trim() || session?.user?.image,
     });
 
     if (error) {
@@ -31,17 +33,16 @@ const UpdateProfilePage = () => {
     router.push("/profile");
   };
 
-  if (isLoading) return (
-    <div className="flex justify-center items-center min-h-[60vh]">
-      <span className="loading loading-spinner loading-lg text-blue-500"></span>
-    </div>
-  )
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center min-h-[60vh]">
+        <span className="loading loading-spinner loading-lg text-blue-500"></span>
+      </div>
+    );
 
   return (
     <div className="min-h-[80vh] flex justify-center items-center px-4">
-
       <div className="w-full max-w-md bg-blue-50 p-6 rounded-xl shadow-md space-y-4">
-
         <h1 className="text-2xl font-bold">Update Profile</h1>
 
         <div>
@@ -76,9 +77,7 @@ const UpdateProfilePage = () => {
         >
           Update Information
         </button>
-
       </div>
-
     </div>
   );
 };

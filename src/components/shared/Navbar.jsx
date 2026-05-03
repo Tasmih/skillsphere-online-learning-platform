@@ -2,16 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, User } from "lucide-react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { useSession, authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
+import { User } from "lucide-react";
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
   const pathname = usePathname();
-
   const { data: session, isLoading } = useSession();
 
   const isActive = (path) => pathname === path;
@@ -19,7 +17,6 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await authClient.signOut();
-      setOpen(false);
       toast.success("Logged out successfully");
     } catch (err) {
       console.log(err);
@@ -27,7 +24,6 @@ const Navbar = () => {
     }
   };
 
-  // avatar logic
   const avatarSrc =
     session?.user?.image &&
     typeof session.user.image === "string" &&
@@ -36,119 +32,114 @@ const Navbar = () => {
       ? session.user.image
       : "/assets/user.png";
 
+  const navLinks = (
+    <>
+      <li>
+        <Link
+          href="/"
+          className={isActive("/") ? "text-blue-600 font-semibold" : "text-gray-600 hover:text-blue-600"}
+        >
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link
+          href="/all-courses"
+          className={isActive("/all-courses") ? "text-blue-600 font-semibold" : "text-gray-600 hover:text-blue-600"}
+        >
+          Courses
+        </Link>
+      </li>
+      <li>
+        <Link
+          href="/profile"
+          className={isActive("/profile") ? "text-blue-600 font-semibold" : "text-gray-600 hover:text-blue-600"}
+        >
+          My Profile
+        </Link>
+      </li>
+    </>
+  );
+
   return (
-    <div className="border-b bg-white sticky top-0 z-50">
-      <nav className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+    <div className="navbar bg-base-100 border-b border-b-blue-100 w-11/12 mx-auto">
 
-        <div className="flex items-center gap-2">
-          <Image src="/assets/logo5.png" alt="logo" width={80} height={80} />
-          <h3 className="text-xl font-bold">
-            <span className="text-blue-800">Skill</span>
-            <span className="text-blue-500">Sphere</span>
-          </h3>
+      <div className="navbar-start">
+        <div className="dropdown">
+          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+            </svg>
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
+          >
+            {navLinks}
+          </ul>
         </div>
 
-        
-        <ul className="hidden md:flex gap-6 text-sm font-medium">
+        <div className="flex items-center">
+  <Image
+    src="/assets/logo10.png"
+    alt="logo"
+    width={90}
+    height={90}
+    className="animate-spin"
+    style={{ animationDuration: "15s" }}
+  />
+</div>
+      </div>
 
-          <li>
-            <Link
-              href="/"
-              className={`relative transition ${
-                isActive("/")
-                  ? "text-blue-600 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[2px] after:bg-blue-600"
-                  : "hover:text-blue-600"
-              }`}
-            >
-              Home
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              href="/all-courses"
-              className={`relative transition ${
-                isActive("/all-courses")
-                  ? "text-blue-600 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[2px] after:bg-blue-600"
-                  : "hover:text-blue-600"
-              }`}
-            >
-              Courses
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              href="/profile"
-              className={`relative transition ${
-                isActive("/profile")
-                  ? "text-blue-600 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[2px] after:bg-blue-600"
-                  : "hover:text-blue-600"
-              }`}
-            >
-              My Profile
-            </Link>
-          </li>
-
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal gap-2 text-sm font-medium">
+          {navLinks}
         </ul>
+      </div>
 
-        {/* auth */}
-        <div className="hidden md:flex items-center gap-3">
+      <div className="navbar-end flex items-center gap-2">
+        {isLoading ? (
+          <span className="text-sm text-gray-400">Loading...</span>
+        ) : session?.user ? (
+          <>
+            <div className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-200">
+              <span className="text-sm font-medium text-gray-700 hidden sm:block">
+                Hello, {session.user.name}
+              </span>
+              <Image
+                src={avatarSrc}
+                alt="avatar"
+                width={32}
+                height={32}
+                className="rounded-full object-cover ring-2 ring-blue-200"
+              />
+            </div>
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 text-white text-sm px-4 py-1.5 rounded-full hover:bg-red-600 transition-colors duration-200"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link
+              href="/login"
+              className="flex items-center gap-1 px-4 py-1.5 rounded-full border border-blue-600 text-blue-600 text-sm hover:bg-blue-600 hover:text-white transition-colors duration-200"
+            >
+              <User className="w-4 h-4" />
+              Login
+            </Link>
+            <Link
+              href="/register"
+              className="px-4 py-1.5 rounded-full bg-blue-600 text-white text-sm hover:bg-blue-700 transition-colors duration-200"
+            >
+              Register
+            </Link>
+          </>
+        )}
+      </div>
 
-          {isLoading ? (
-            <span className="text-sm">Loading...</span>
-          ) : session?.user ? (
-            <>
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-medium">
-                  Hello, {session.user.name}
-                </span>
-
-                <Image
-                  src={avatarSrc}
-                  alt="avatar"
-                  width={38}
-                  height={38}
-                  className="rounded-full object-cover"
-                />
-              </div>
-
-              <button
-                onClick={handleLogout}
-                className="bg-red-500 text-white px-3 py-1.5 rounded-md hover:bg-red-400 transition"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link
-                href="/login"
-                className="flex items-center gap-1 px-3 py-1.5 rounded-md border border-blue-600 text-blue-600
-                           hover:bg-blue-600 hover:text-white transition"
-              >
-                <User className="w-4 h-4" />
-                Login
-              </Link>
-
-              <Link
-                href="/register"
-                className="px-3 py-1.5 rounded-md bg-blue-500 text-white
-                           hover:bg-blue-600 transition"
-              >
-                Register
-              </Link>
-            </>
-          )}
-
-        </div>
-
-        {/* mobile menu button */}
-        <button className="md:hidden" onClick={() => setOpen(!open)}>
-          <Menu />
-        </button>
-
-      </nav>
     </div>
   );
 };

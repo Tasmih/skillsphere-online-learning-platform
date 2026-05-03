@@ -5,23 +5,24 @@ import { BsArrowRight } from 'react-icons/bs';
 import { FaStar } from 'react-icons/fa';
 
 const CourseCard = ({ course }) => {
-  console.log(course);
-
   return (
-    <div className="card bg-base-100 shadow-xl border rounded-xl">
-      
-      <figure className="relative w-full h-48 aspect-square">
+    <div className="card bg-base-100 border border-blue-200 rounded-xl overflow-hidden 
+shadow-md hover:shadow-xl 
+transition-all duration-300 
+hover:-translate-y-2 hover:scale-[1.02] cursor-pointer">
+
+      <figure className="w-full overflow-hidden rounded-t-md">
         <img
           src={course.image}
           alt={course.title}
           width={600}
           height={400}
-          className='object-cover rounded-xl'
+          className="w-full h-72 object-cover"
         />
       </figure>
 
-      <div className="card-body p-5 mt-1">
-        
+      <div className="card-body p-5 flex flex-col flex-1">
+
         <h2 className="card-title text-lg leading-tight line-clamp-2">
           {course.title}
         </h2>
@@ -30,33 +31,20 @@ const CourseCard = ({ course }) => {
           Instructor: {course.instructor}
         </p>
 
-        
-       <div className="mt-3 flex flex-col gap-1">
-
-  <div className="flex items-center gap-2">
-
-    <h2 className="text-sm font-medium">Rating:</h2>
-
-    <div className="flex items-center gap-1">
-      <FaStar className="text-yellow-400" />
-      <span className="font-medium text-sm">
-        {course.rating}
-      </span>
-
-      
-    </div>
-
-  </div>
-        </div>
-        <div>
-          
+        <div className="flex items-center gap-2 mt-3">
+          <h2 className="text-sm font-medium">Rating:</h2>
+          <div className="flex items-center gap-1">
+            <FaStar className="text-yellow-400" />
+            <span className="font-medium text-sm">{course.rating}</span>
+          </div>
         </div>
 
-        <div className="card-actions justify-end mt-4">
-          
-         <Link href={`/all-courses/${course.id}`}>  <button className="btn btn-primary">
-            View Details  <BsArrowRight/>
-          </button></Link>
+        <div className="card-actions justify-end mt-auto pt-4">
+          <Link href={`/all-courses/${course.id}`}>
+            <button className="btn btn-primary">
+              View Details <BsArrowRight />
+            </button>
+          </Link>
         </div>
 
       </div>
