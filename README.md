@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+SkillSphere - Online Learning Platform
+SkillSphere is a modern online learning platform built with Next.js, Tailwind CSS, DaisyUI, and BetterAuth.
+It allows users to explore different courses, view course details, and manage their learning journey with authentication support.
 
-## Getting Started
+Project Purpose
 
-First, run the development server:
+The main purpose of this project is to create a student-friendly online learning platform where users can explore courses, view details, and access protected content after login.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+It also includes authentication, profile management, and secure user experience using BetterAuth.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Live Link
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+Key Features
+Modern student-friendly UI design
+Fully responsive for mobile, tablet, and desktop
+Persistent Navbar and Footer
+Next.js App Router based routing system
+Course listing from static JSON data
+Course details page with curriculum
+Protected routes for course details
+User registration (name, email, photo, password)
+User login system
+Google social login
+Logout functionality
+Conditional Navbar based on auth state
+User profile page with details
+Update profile information feature
+Toast notifications for success/error
+Global loading screen for better UX
+Deployed on Vercel
+Reload-safe routing support
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Technology Used
+Next.js
+React.js
+Tailwind CSS
+DaisyUI / HeroUI
+BetterAuth
+MongoDB (or adapter if used)
+React Icons
+React Hot Toast / Sonner
+Lottie / Animation libraries
+Vercel (Deployment)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+NPM Packages Used
+next
+react
+react-dom
+tailwindcss
+daisyui
+better-auth
+@better-auth/client
+react-icons
+sonner
+lottie-react
 
-## Deploy on Vercel
+What Makes This Project Special
+Clean LMS-style UI (like Udemy / Coursera)
+Smooth authentication flow
+Protected learning experience
+Fully responsive modern design
+Real-world project structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Future Improvements
+Payment system integration
+Video lecture player
+Instructor dashboard
