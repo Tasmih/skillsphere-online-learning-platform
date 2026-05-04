@@ -6,13 +6,12 @@ import { PiDotOutlineFill } from "react-icons/pi";
 const CourseDetailsPage = async ({ params }) => {
   const { id } = await params;
 
-  const res = await fetch("/data.json", {
-    next: { revalidate: 3600 },
+   const res = await fetch("https://skillsphere-online-learning-platform.onrender.com/courses", {
+  next: { revalidate: 3600 },
   });
 
-  const courses = await res.json();
-  const course = courses.find((c) => String(c.id) === String(id));
-
+const courses = await res.json();
+const course = courses.find((c) => String(c.id) === String(id));
   if (!course) {
     return (
       <div className="max-w-4xl mx-auto p-6 text-center mt-20">
