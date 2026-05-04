@@ -6,12 +6,12 @@ import { PiDotOutlineFill } from "react-icons/pi";
 const CourseDetailsPage = async ({ params }) => {
   const { id } = await params;
 
-  const res = await fetch("https://skillsphere-online-learning-platform.onrender.com/courses", {
-    cache: "no-store",
+  const res = await fetch("/data.json", {
+    next: { revalidate: 3600 },
   });
 
   const courses = await res.json();
-  const course = courses.find((c) => c.id === Number(id));
+  const course = courses.find((c) => String(c.id) === String(id));
 
   if (!course) {
     return (
@@ -29,14 +29,14 @@ const CourseDetailsPage = async ({ params }) => {
   return (
     <div className="max-w-4xl mx-auto p-4 md:p-6 mb-10">
 
-     <Image
-  src={course.image}
-  alt={course.title}
-  width={600}
-  height={400}
-  className="w-full h-100 md:h-80 object-cover rounded-xl mb-6"
-  unoptimized
-/>
+      <Image
+        src={course.image}
+        alt={course.title}
+        width={600}
+        height={400}
+        className="w-full h-100 md:h-80 object-cover rounded-xl mb-6"
+        unoptimized
+      />
 
       <h1 className="text-xl md:text-2xl font-bold mb-3">{course.title}</h1>
 
@@ -63,7 +63,6 @@ const CourseDetailsPage = async ({ params }) => {
         {course.description}
       </p>
 
-      {/* curriculum */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg md:text-xl font-bold">Course Curriculum</h2>

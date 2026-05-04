@@ -11,7 +11,7 @@ const AllCoursesPage = () => {
 
   
   useEffect(() => {
-    fetch('/data.json')
+    fetch('https://skillsphere-online-learning-platform.onrender.com/courses')
       .then(res => res.json())
       .then(data => setCourses(data))
   }, [])
