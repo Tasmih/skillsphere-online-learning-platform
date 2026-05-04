@@ -51,7 +51,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-[80vh] flex justify-center items-center bg-white px-4">
+    <div className="min-h-[80vh] flex justify-center items-center bg-white px-4 mt-2">
 
       <div className="w-full max-w-sm p-6 rounded-xl bg-blue-50 shadow-md">
 

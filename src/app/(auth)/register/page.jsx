@@ -26,7 +26,7 @@ const RegisterPage = () => {
       email: data.email,
       password: data.password,
       name: data.name,
-      
+      image: data.photo,
     });
 
     if (error) {
@@ -46,7 +46,7 @@ console.log(data,)
   }
 
   return (
-    <div className="min-h-[80vh] flex justify-center items-center bg-white px-4">
+    <div className="min-h-[80vh] flex justify-center items-center bg-white px-4 mt-2">
       <div className="w-full max-w-sm p-6 rounded-xl bg-blue-50 shadow-md">
 
         <h2 className="text-center text-2xl font-bold mb-4">
@@ -82,6 +82,19 @@ console.log(data,)
             />
             {errors.email && (
               <p className="text-red-500 text-sm">{errors.email.message}</p>
+            )}
+          </fieldset>
+
+          <fieldset className="fieldset">
+            <legend className="fieldset-legend">Photo URL</legend>
+            <input
+              type="text"
+              className="input input-bordered w-full"
+              placeholder="Enter photo URL"
+              {...register("photo", { required: "Photo URL is required" })}
+            />
+            {errors.photo && (
+              <p className="text-red-500 text-sm">{errors.photo.message}</p>
             )}
           </fieldset>
 
