@@ -39,7 +39,7 @@ hover:-translate-y-2 hover:scale-[1.02] cursor-pointer">
           </div>
         </div>
 
-        <div className="card-actions justify-end mt-auto pt-4">
+        <div className="card-actions justify-center mt-auto pt-4">
           <Link href={`/all-courses/${course.id}`}>
             <button className="btn btn-primary">
               View Details <BsArrowRight />

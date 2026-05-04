@@ -89,14 +89,14 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center">
-          <Image
-            src="/assets/logo10.png"
-            alt="logo"
-            width={90}
-            height={90}
-            className="animate-spin"
-            style={{ animationDuration: "15s" }}
-          />
+         <Image
+  src="/assets/logo10.png"
+  alt="logo"
+  width={90}
+  height={90}
+  className="animate-spin w-12 h-12 md:w-[90px] md:h-[90px]"
+  style={{ animationDuration: "15s" }}
+/>
         </div>
       </div>
 
