@@ -1,4 +1,5 @@
 import Banner from "@/components/Banner";
+import CourseMarquee from "@/components/shared/CourseMarquee";
 import LearningTips from "@/components/LearningTips";
 import PopularCourses from "@/components/PopularCourses";
 import TopInstructors from "@/components/TopInstructors";
@@ -12,6 +13,11 @@ export default function Home() {
 
 
       <Banner />
+
+
+      
+     
+
 
 <section className="p-6 space-y-12">
   <PopularCourses />

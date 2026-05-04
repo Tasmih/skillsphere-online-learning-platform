@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import ConditionalNavbar from "@/components/shared/ConditionalNavbar";
+import StatsMarquee from "@/components/shared/CourseMarquee";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,10 +43,12 @@ export default function RootLayout({ children }) {
       <body className="min-h-screen flex flex-col">
 
          <ConditionalNavbar/>
+           <StatsMarquee />
 
         <main className="max-w-7xl mx-auto w-full flex-1 px-4">
           {children}
         </main>
+          
              <ToastContainer position="top-right" autoClose={2000} />
         <Footer />
 
