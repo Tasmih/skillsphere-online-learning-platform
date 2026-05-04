@@ -1,3 +1,5 @@
+
+
 import dns from "node:dns";
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 import "animate.css";
@@ -6,10 +8,12 @@ import "./globals.css";
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/shared/Navbar";
+
 import Footer from "@/components/shared/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import ConditionalNavbar from "@/components/shared/ConditionalNavbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +32,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+ 
   return (
     <html
       lang="en"
@@ -36,7 +41,7 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-screen flex flex-col">
 
-        <Navbar />
+         <ConditionalNavbar/>
 
         <main className="max-w-7xl mx-auto w-full flex-1 px-4">
           {children}

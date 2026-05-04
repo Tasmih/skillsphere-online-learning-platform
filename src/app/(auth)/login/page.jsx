@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
@@ -17,45 +16,32 @@ const LoginPage = () => {
   } = useForm();
 
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
 
-    const handleGoogleSignin = async() =>{ 
-        const data = await authClient.signIn.social({
-        provider: "google",
-        callbackURL:"/",
-      });
-    console.log(data,)
-      }
+  const handleGoogleSignin = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
+    console.log(data);
+  };
 
   const handleLogicFunc = async (data) => {
-    console.log("Login Data:", data);
-
-    const { error } = await authClient.signIn.email({
+    const { data: session, error } = await authClient.signIn.email({
       email: data.email,
       password: data.password,
-      rememberMe: true,
-     
     });
-    
 
-    if (error) {
-      toast.error(error.message || "Login failed");
-      return;
+    if (!error) {
+      toast.success("Logged in!");
+      window.location.href = "/"; 
+    } else {
+      toast.error(error?.message || "Login failed!");
     }
-
-    toast.success("Login successful");
-    // for proxy
-    const params = new URLSearchParams(window.location.search)
-    const callbackURL = params.get('callbackURL') || '/'
-    router.push(callbackURL)
-
   };
 
   return (
     <div className="min-h-[80vh] flex justify-center items-center bg-white px-4 mt-2">
-
       <div className="w-full max-w-sm p-6 rounded-xl bg-blue-50 shadow-md">
-
         <h2 className="text-center text-2xl font-bold mb-4">
           Login your account
         </h2>
@@ -63,8 +49,6 @@ const LoginPage = () => {
         <div className="divider my-2"></div>
 
         <form className="space-y-3" onSubmit={handleSubmit(handleLogicFunc)}>
-
-      
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Email</legend>
             <input
@@ -80,7 +64,6 @@ const LoginPage = () => {
             )}
           </fieldset>
 
-  
           <fieldset className="fieldset relative">
             <legend className="fieldset-legend">Password</legend>
 
@@ -105,15 +88,13 @@ const LoginPage = () => {
             )}
           </fieldset>
 
-  
           <button className="btn w-full bg-blue-500 text-white hover:bg-blue-600 transition">
             Login
           </button>
 
-           <div className="divider my-3">OR</div>
-          
-              
-                     <button
+          <div className="divider my-3">OR</div>
+
+          <button
             type="button"
             className="btn w-full bg-white border flex items-center justify-center gap-2 hover:bg-gray-100 transition"
             onClick={handleGoogleSignin}
@@ -121,7 +102,6 @@ const LoginPage = () => {
             <FcGoogle className="w-5 h-5" />
             Continue with Google
           </button>
-
         </form>
 
         <div className="divider my-3"></div>
@@ -132,7 +112,6 @@ const LoginPage = () => {
             Register
           </Link>
         </p>
-
       </div>
     </div>
   );
