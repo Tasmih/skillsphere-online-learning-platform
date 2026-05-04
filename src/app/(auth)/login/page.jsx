@@ -7,6 +7,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
   const {
@@ -18,6 +19,13 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
+    const handleGoogleSignin = async() =>{ 
+        const data = await authClient.signIn.social({
+        provider: "google",
+      });
+    console.log(data,)
+      }
+
   const handleLogicFunc = async (data) => {
     console.log("Login Data:", data);
 
@@ -27,6 +35,7 @@ const LoginPage = () => {
       rememberMe: true,
      
     });
+    
 
     if (error) {
       toast.error(error.message || "Login failed");
@@ -98,6 +107,18 @@ const LoginPage = () => {
   
           <button className="btn w-full bg-blue-500 text-white hover:bg-blue-600 transition">
             Login
+          </button>
+
+           <div className="divider my-3">OR</div>
+          
+              
+                     <button
+            type="button"
+            className="btn w-full bg-white border flex items-center justify-center gap-2 hover:bg-gray-100 transition"
+            onClick={handleGoogleSignin}
+          >
+            <FcGoogle className="w-5 h-5" />
+            Continue with Google
           </button>
 
         </form>

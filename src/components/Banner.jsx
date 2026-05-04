@@ -63,13 +63,17 @@ style={{ background: "linear-gradient(to right, #c7d2fe 0%, #dde5ff 30%, #eef1ff
 
         {/* right side image */}
        <div className="flex-1 flex items-end justify-end w-full overflow-hidden">
+ <div className="flex-1 flex items-end justify-end w-full overflow-hidden">
   <Image
     src="/assets/banner9.png"
     width={600}
     height={1000}
     alt="skill learning banner"
+    priority                 
+    quality={85}                
     className="w-full h-auto object-contain rounded-xl object-bottom drop-shadow-xl"
   />
+</div>
 </div>
 
       </div>

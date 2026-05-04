@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { useSession, authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
@@ -10,14 +9,24 @@ import { User } from "lucide-react";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const { data: session, isLoading } = useSession();
+  const { data: session, isPending } = useSession();
+
+  if (isPending) {
+    return null;
+  }
 
   const isActive = (path) => pathname === path;
 
   const handleLogout = async () => {
     try {
-      await authClient.signOut();
-      toast.success("Logged out successfully");
+      await authClient.signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            toast.success("Logged out successfully");
+            window.location.href = "/login";
+          },
+        },
+      });
     } catch (err) {
       console.log(err);
       toast.error("Logout failed");
@@ -80,15 +89,15 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center">
-  <Image
-    src="/assets/logo10.png"
-    alt="logo"
-    width={90}
-    height={90}
-    className="animate-spin"
-    style={{ animationDuration: "15s" }}
-  />
-</div>
+          <Image
+            src="/assets/logo10.png"
+            alt="logo"
+            width={90}
+            height={90}
+            className="animate-spin"
+            style={{ animationDuration: "15s" }}
+          />
+        </div>
       </div>
 
       <div className="navbar-center hidden lg:flex">
@@ -98,9 +107,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end flex items-center gap-2">
-        {isLoading ? (
-          <span className="text-sm text-gray-400">Loading...</span>
-        ) : session?.user ? (
+        {session?.user ? (
           <>
             <div className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-200">
               <span className="text-sm font-medium text-gray-700 hidden sm:block">

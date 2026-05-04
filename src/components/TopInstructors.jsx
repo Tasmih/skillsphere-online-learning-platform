@@ -14,7 +14,7 @@ const TopInstructors = () => {
             Top Instructors
           </h2>
         </div>
-        <p className="text-gray-500 mt-2">
+        <p className="text-gray-800 mt-2">
           Learn from industry experts
         </p>
       </div>
@@ -124,7 +124,7 @@ const TopInstructors = () => {
             </span>
           </div>
         </div>
-
+        
       </div>
     </section>
   );
