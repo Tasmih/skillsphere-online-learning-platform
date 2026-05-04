@@ -1,5 +1,4 @@
 import Banner from "@/components/Banner";
-import HeroSlider from "@/components/HeroSlider";
 import LearningTips from "@/components/LearningTips";
 import PopularCourses from "@/components/PopularCourses";
 import TopInstructors from "@/components/TopInstructors";

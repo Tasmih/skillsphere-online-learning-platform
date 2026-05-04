@@ -4,7 +4,7 @@ import CourseCard from "./CourseCard";
 import Marquee from "react-fast-marquee";
 
 const PopularCourses = async () => {
-  const res = await fetch('http://localhost:3000/data.json');
+  const res = await fetch('https://skillsphere-online-learning-platform.onrender.com/courses');
   const courses = await res.json();
 
   const topCourses = [...courses]

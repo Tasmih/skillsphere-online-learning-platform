@@ -1,0 +1,142 @@
+{
+    "courses":[
+  {
+    "id": 1,
+    "title": "Complete Web Development Bootcamp",
+    "instructor": "John Doe",
+    "duration": "20 hours",
+    "rating": 4.8,
+    "level": "Beginner",
+    "description": "Learn full-stack web development from scratch.",
+    "image": "https://i.ibb.co.com/svKRnxmT/website-development-links-seo-webinar-cyberspace-concept.jpg",
+    "category": "Development",
+    "curriculum": [
+      "Introduction and Course Overview",
+      "Setting up your development environment",
+      "HTML & CSS fundamentals",
+      "JavaScript basics and DOM manipulation",
+      "Building responsive websites",
+      "Introduction to React JS",
+      "Backend with Node.js and Express",
+      "Database with MongoDB",
+      "Final project development",
+      "Testing, debugging and deployment"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "React JS Masterclass",
+    "instructor": "Sarah Khan",
+    "duration": "15 hours",
+    "rating": 4.7,
+    "level": "Intermediate",
+    "description": "Master React JS with hooks, state management and real projects.",
+    "image": "https://i.ibb.co.com/C397gXMZ/professional-programmer-working-late-dark-office.jpg",
+    "category": "Development",
+    "curriculum": [
+      "Introduction to React and JSX",
+      "Components and Props",
+      "State and useState Hook",
+      "useEffect and Lifecycle",
+      "React Router for navigation",
+      "Context API and global state",
+      "Working with APIs and fetch",
+      "Building a real project",
+      "Performance optimization",
+      "Deployment with Vercel"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "UI/UX Design Fundamentals",
+    "instructor": "Emily Watson",
+    "duration": "12 hours",
+    "rating": 4.6,
+    "level": "Beginner",
+    "description": "Learn design principles, wireframing and prototyping.",
+    "image": "https://i.ibb.co.com/5gnrr70d/walls-io-JNe4-RGik-Pj-I-unsplash.jpg",
+    "category": "Design",
+    "curriculum": [
+      "Introduction to UI/UX Design",
+      "Design thinking process",
+      "Color theory and typography",
+      "Wireframing basics",
+      "Prototyping with Figma",
+      "User research techniques",
+      "Accessibility in design",
+      "Building a design system",
+      "Portfolio project",
+      "Getting your certificate"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Python for Data Science",
+    "instructor": "Michael Lee",
+    "duration": "18 hours",
+    "rating": 4.9,
+    "level": "Intermediate",
+    "description": "Analyze data and build machine learning models using Python.",
+    "image": "https://i.ibb.co.com/ksxXhJqD/programming-language-coding-developer-software-concept.jpg",
+    "category": "Data Science",
+    "curriculum": [
+      "Python basics and syntax",
+      "NumPy for numerical computing",
+      "Pandas for data manipulation",
+      "Data visualization with Matplotlib",
+      "Exploratory data analysis",
+      "Introduction to Machine Learning",
+      "Supervised learning algorithms",
+      "Model evaluation and tuning",
+      "Real-world data project",
+      "Deployment and next steps"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Digital Marketing Mastery",
+    "instructor": "Ayesha Rahman",
+    "duration": "10 hours",
+    "rating": 4.5,
+    "level": "Beginner",
+    "description": "Learn SEO, social media marketing and ads strategy.",
+    "image": "https://i.ibb.co.com/XfvPGYkP/walls-io-5-Op-KK67e-MWE-unsplash.jpg",
+    "category": "Marketing",
+    "curriculum": [
+      "Introduction to Digital Marketing",
+      "Understanding your target audience",
+      "SEO fundamentals and keyword research",
+      "Content marketing strategy",
+      "Social media marketing",
+      "Facebook and Instagram Ads",
+      "Google Ads basics",
+      "Email marketing campaigns",
+      "Analytics and tracking results",
+      "Building your marketing portfolio"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Next.js Full Stack Guide",
+    "instructor": "David Smith",
+    "duration": "16 hours",
+    "rating": 4.8,
+    "level": "Advanced",
+    "description": "Build production-ready full stack apps with Next.js.",
+    "image": "https://i.ibb.co.com/Rpk2nsBq/peaky-frames-Sl-DBq-OJfs4s-unsplash.jpg",
+    "category": "Development",
+    "curriculum": [
+      "Next.js App Router fundamentals",
+      "Server and Client Components",
+      "Dynamic routing and layouts",
+      "Data fetching strategies",
+      "Authentication with NextAuth",
+      "Database integration with Prisma",
+      "API routes and server actions",
+      "Image optimization and performance",
+      "Building and deploying to Vercel",
+      "Getting your certificate"
+    ]
+  }
+]
+}

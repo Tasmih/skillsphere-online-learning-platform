@@ -6,7 +6,7 @@ import { PiDotOutlineFill } from "react-icons/pi";
 const CourseDetailsPage = async ({ params }) => {
   const { id } = await params;
 
-  const res = await fetch("http://localhost:3000/data.json", {
+  const res = await fetch("https://skillsphere-online-learning-platform.onrender.com/courses", {
     cache: "no-store",
   });
 
