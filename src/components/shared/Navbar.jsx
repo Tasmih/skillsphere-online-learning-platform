@@ -23,7 +23,7 @@ const Navbar = () => {
         fetchOptions: {
           onSuccess: () => {
             toast.success("Logged out successfully");
-            window.location.href = "/login";
+            window.location.href = "/";
           },
         },
       });
