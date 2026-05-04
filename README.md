@@ -44,9 +44,9 @@ It also includes authentication, profile management, and secure user experience 
 - **Next.js**
 - **React.js**
 - **Tailwind CSS**
-- **DaisyUI / HeroUI**
+- **DaisyUI**
 - **BetterAuth**
-- **MongoDB** (or adapter if used)
+- **MongoDB** 
 - **React Icons**
 - **React Toast**
 - **Vercel** (Deployment)
@@ -62,6 +62,7 @@ It also includes authentication, profile management, and secure user experience 
 - `better-auth`
 - `@better-auth/client`
 - `react-icons`
+- `animate.css`
 
 
 ---
