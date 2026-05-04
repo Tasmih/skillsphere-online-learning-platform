@@ -2,6 +2,8 @@ import { FaFire } from "react-icons/fa";
 import CourseCard from "./CourseCard";
 
 import Marquee from "react-fast-marquee";
+import Link from "next/link";
+import { BsArrowRight } from "react-icons/bs";
 
 const PopularCourses = async () => {
   const res = await fetch('https://skillsphere-online-learning-platform.onrender.com/courses');
@@ -37,6 +39,14 @@ const PopularCourses = async () => {
         ))}
       </div>
 
+
+<div className="card-actions flex justify-center items-center mt-6 pt-4 pb-3 hover:bg-blue-100 rounded-lg transition-colors duration-200">
+          <Link href={"/all-courses"}>
+            <button className="btn btn-primary text-white hover:bg-blue-300 rounded-lg  duration-200">
+              See All Courses <BsArrowRight />
+            </button>
+          </Link>
+        </div>
     </section>
   );
 };
