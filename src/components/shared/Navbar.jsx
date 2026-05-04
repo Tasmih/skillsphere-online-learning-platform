@@ -71,9 +71,9 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100 border-b border-b-blue-100 w-11/12 mx-auto">
+    <div className="navbar bg-base-100 border-b border-b-blue-100 w-11/12 mx-auto justify-center lg:justify-between">
 
-      <div className="navbar-start">
+      <div className="navbar-start justify-center lg:justify-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -88,15 +88,15 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className="flex items-center">
-         <Image
-  src="/assets/logo10.png"
-  alt="logo"
-  width={90}
-  height={90}
-  className="animate-spin w-12 h-12 md:w-[90px] md:h-[90px]"
-  style={{ animationDuration: "15s" }}
-/>
+        <div className="flex items-center justify-center">
+          <Image
+            src="/assets/logo10.png"
+            alt="logo"
+            width={90}
+            height={90}
+            className="animate-spin w-12 h-12 md:w-[90px] md:h-[90px]"
+            style={{ animationDuration: "15s" }}
+          />
         </div>
       </div>
 
@@ -106,7 +106,7 @@ const Navbar = () => {
         </ul>
       </div>
 
-      <div className="navbar-end flex items-center gap-2">
+      <div className="navbar-end flex items-center justify-center lg:justify-end gap-2">
         {session?.user ? (
           <>
             <div className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-200">
