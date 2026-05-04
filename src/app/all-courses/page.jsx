@@ -8,15 +8,25 @@ const AllCoursesPage = () => {
 
   const [courses, setCourses] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
   
-  useEffect(() => {
-    fetch('https://skillsphere-online-learning-platform.onrender.com/courses')
-      .then(res => res.json())
-      .then(data => setCourses(data))
-  }, [])
+ useEffect(() => {
+  fetch('https://skillsphere-online-learning-platform.onrender.com/courses')
+    .then(res => res.json())
+    .then(data => {
+      setCourses(data);
+      setLoading(false);
+    })
+}, [])
 
-
+ if (loading) {
+  return (
+    <div className="flex justify-center items-center min-h-screen">
+      <span className="loading loading-spinner loading-lg text-primary"></span>
+    </div>
+  )
+}
   const filtered = courses.filter(course =>
     course.title.toLowerCase().includes(search.toLowerCase())
   )
